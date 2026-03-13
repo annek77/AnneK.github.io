@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anne Kinigadner-Walch</title>
+<style>
+  /* ── Design Tokens ── */
+  :root {
+    --bg: #1a1a1a;
+    --bg-card: #222;
+    --border: #333;
+    --text: #e8e0d4;
+    --text-muted: #999;
+    --gold: #C4A265;
+    --ochre: #8B6832;
+    --umber: #2E1E0A;
+    --near-black: #1A1008;
+    --font-body: Georgia, 'Times New Roman', serif;
+  }
+
+  /* ── Reset & Base ── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Leopard Pattern (inline SVG, used as subtle overlay) ── */
+  .leopard-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.04;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><defs><pattern id="leopard" x="0" y="0" width="300" height="300" patternUnits="userSpaceOnUse"><rect width="300" height="300" fill="%23C4A265"/><path d="M32,28 C38,18 52,16 58,24 C62,29 60,38 54,42 C48,36 42,34 36,36 C30,38 28,34 32,28Z" fill="%231A1008" opacity="0.88"/><path d="M28,40 C24,48 30,56 38,54 C34,50 32,44 28,40Z" fill="%232E1E0A" opacity="0.82"/><path d="M50,50 C54,48 58,52 56,56 C52,58 48,54 50,50Z" fill="%231A1008" opacity="0.85"/><path d="M130,22 C140,14 156,18 160,28 C164,36 158,46 148,48 C142,40 136,36 130,38 C124,40 122,32 130,22Z" fill="%231A1008" opacity="0.9"/><path d="M122,44 C118,52 124,60 134,58 C128,54 124,48 122,44Z" fill="%232E1E0A" opacity="0.79"/><path d="M162,36 C166,32 172,36 170,42 C166,44 160,40 162,36Z" fill="%231A1008" opacity="0.84"/><path d="M230,18 C238,10 254,12 260,22 C264,30 258,40 250,44 C244,36 238,32 232,34 C226,36 224,28 230,18Z" fill="%231A1008" opacity="0.87"/><path d="M224,42 C220,50 226,58 234,56 C230,52 226,46 224,42Z" fill="%232E1E0A" opacity="0.8"/><path d="M264,28 C268,24 274,28 272,34 C268,36 262,32 264,28Z" fill="%231A1008" opacity="0.86"/><path d="M18,110 C26,100 42,102 48,114 C52,122 46,132 38,136 C32,128 26,124 20,126 C14,128 12,120 18,110Z" fill="%231A1008" opacity="0.9"/><path d="M52,120 C58,118 62,124 58,130 C54,132 50,126 52,120Z" fill="%232E1E0A" opacity="0.76"/><path d="M12,134 C8,140 14,148 22,146 C18,142 14,138 12,134Z" fill="%231A1008" opacity="0.82"/><path d="M120,100 C128,88 148,90 154,102 C158,112 150,124 140,128 C134,118 126,114 120,116 C112,118 110,108 120,100Z" fill="%231A1008" opacity="0.92"/><path d="M110,124 C106,134 112,142 122,140 C116,136 112,128 110,124Z" fill="%232E1E0A" opacity="0.8"/><path d="M156,108 C162,104 168,110 164,116 C160,118 154,114 156,108Z" fill="%231A1008" opacity="0.85"/><path d="M228,108 C236,98 252,100 258,110 C262,118 256,130 248,134 C242,124 236,120 230,122 C224,124 222,116 228,108Z" fill="%231A1008" opacity="0.88"/><path d="M220,130 C216,138 222,146 232,144 C226,140 222,134 220,130Z" fill="%232E1E0A" opacity="0.79"/><path d="M260,116 C266,112 272,118 268,124 C264,126 258,120 260,116Z" fill="%231A1008" opacity="0.84"/><path d="M36,200 C44,190 60,192 66,204 C70,212 64,224 56,228 C50,218 44,214 38,216 C32,218 30,210 36,200Z" fill="%231A1008" opacity="0.9"/><path d="M70,210 C76,208 80,214 76,220 C72,222 68,216 70,210Z" fill="%232E1E0A" opacity="0.77"/><path d="M28,226 C24,234 30,242 40,240 C34,236 30,230 28,226Z" fill="%231A1008" opacity="0.83"/><path d="M148,195 C156,184 174,186 180,198 C184,208 176,220 168,224 C162,214 154,210 148,212 C140,214 138,204 148,195Z" fill="%231A1008" opacity="0.91"/><path d="M138,218 C134,228 140,236 150,234 C144,230 140,224 138,218Z" fill="%232E1E0A" opacity="0.81"/><path d="M182,204 C188,200 194,206 190,212 C186,214 180,208 182,204Z" fill="%231A1008" opacity="0.86"/><path d="M244,200 C252,190 268,192 274,204 C278,212 272,224 264,228 C258,218 252,214 246,216 C240,218 238,210 244,200Z" fill="%231A1008" opacity="0.89"/><path d="M236,226 C232,234 238,242 248,240 C242,236 238,230 236,226Z" fill="%232E1E0A" opacity="0.78"/><path d="M278,210 C284,206 290,212 286,218 C282,220 276,214 278,210Z" fill="%231A1008" opacity="0.85"/><path d="M80,70 C84,66 90,70 88,76 C84,80 78,76 80,70Z" fill="%231A1008" opacity="0.8"/><path d="M190,68 C194,64 200,68 198,74 C194,78 188,74 190,68Z" fill="%231A1008" opacity="0.82"/><path d="M96,160 C100,156 106,160 104,166 C100,170 94,166 96,160Z" fill="%231A1008" opacity="0.78"/><path d="M200,162 C204,158 210,162 208,168 C204,172 198,168 200,162Z" fill="%231A1008" opacity="0.81"/><path d="M76,260 C80,256 86,260 84,266 C80,270 74,266 76,260Z" fill="%231A1008" opacity="0.79"/><path d="M180,258 C184,254 190,258 188,264 C184,268 178,264 180,258Z" fill="%231A1008" opacity="0.83"/><path d="M280,72 C284,68 290,72 288,78 C284,82 278,78 280,72Z" fill="%231A1008" opacity="0.8"/><path d="M280,260 C284,256 290,260 288,266 C284,270 278,266 280,260Z" fill="%231A1008" opacity="0.82"/></pattern></defs><rect width="300" height="300" fill="url(%23leopard)"/></svg>');
+    background-repeat: repeat;
+    background-size: 300px 300px;
+  }
+
+  /* ── Layout ── */
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 80px 24px 60px;
+  }
+
+  /* ── Header / Hero ── */
+  .hero {
+    margin-bottom: 72px;
+  }
+
+  .hero-name {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .hero-tagline {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 28px;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--ochre);
+    border: none;
+    margin-bottom: 28px;
+  }
+
+  .hero-meta {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.9;
+  }
+
+  .hero-meta span {
+    color: var(--text);
+  }
+
+  /* ── Sections ── */
+  section {
+    margin-bottom: 64px;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 20px;
+  }
+
+  section p {
+    font-size: 1rem;
+    color: var(--text);
+    max-width: 60ch;
+  }
+
+  /* ── Game Card (placeholder) ── */
+  .game-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+
+  .game-card:hover {
+    border-color: var(--ochre);
+  }
+
+  .game-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--ochre), var(--gold), var(--ochre));
+  }
+
+  .game-card-title {
+    font-size: 1.25rem;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+
+  .game-card-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .game-card p {
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 24px;
+    max-width: 55ch;
+  }
+
+  .game-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 10px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+
+  .game-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 20px;
+  }
+
+  .game-status .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ochre);
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* ── Button (for future game link) ── */
+  .btn {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--bg);
+    background: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 10px 28px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 24px;
+  }
+
+  .btn:hover {
+    background: transparent;
+    color: var(--gold);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--gold);
+  }
+
+  .btn-ghost:hover {
+    background: var(--gold);
+    color: var(--bg);
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--gold);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover {
+    color: var(--text);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 560px) {
+    .page {
+      padding: 48px 18px 40px;
+    }
+    .hero {
+      margin-bottom: 52px;
+    }
+    section {
+      margin-bottom: 48px;
+    }
+    .game-card {
+      padding: 24px 20px;
+    }
+  }
+
+  /* ── Fade-in on load ── */
+  .page {
+    animation: fadeUp 0.8s ease-out;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="leopard-overlay" aria-hidden="true"></div>
+
+<main class="page">
+
+  <!-- Hero -->
+  <header class="hero">
+    <h1 class="hero-name">Anne Kinigadner-Walch</h1>
+    <p class="hero-tagline">Exploring bias through play</p>
+    <hr class="hero-divider">
+    <div class="hero-meta">
+      <span>Gaming Mechanisms in Art &amp; Humanities</span><br>
+      University of Vienna &middot; SS 2026<br>
+      Instructor: Arndt Niebisch
+    </div>
+  </header>
+
+  <!-- About -->
+  <section>
+    <div class="section-label">About This Project</div>
+    <p>
+      This site accompanies my work in the Gaming Seminar SS2026. Over the course of the semester, I am developing a serious game that makes algorithmic bias tangible through play &mdash; turning the invisible mechanics of automated decision-making into something you can experience firsthand.
+    </p>
+  </section>
+
+  <!-- Game Card -->
+  <section>
+    <div class="section-label">The Game</div>
+    <div class="game-card">
+      <div class="game-card-title">Hiring Algorithm</div>
+      <div class="game-card-subtitle">A Twine-based narrative game about AI bias in hiring</div>
+      <p>
+        Step into the role of an HR algorithm. Review applications, make decisions, and discover how gender and age bias creep into automated systems &mdash; not through malice, but through mechanics.
+      </p>
+      <div>
+        <span class="game-tag">Twine</span>
+        <span class="game-tag">Serious Game</span>
+        <span class="game-tag">AI Ethics</span>
+        <span class="game-tag">Procedural Rhetoric</span>
+      </div>
+      <div class="game-status">
+        <span class="dot"></span>
+        In development &mdash; launching Summer 2026
+      </div>
+      <!-- Uncomment when game is ready:
+      <a href="game/index.html" class="btn">Play the Game</a>
+      -->
+    </div>
+  </section>
+
+  <!-- Theoretical Background -->
+  <section>
+    <div class="section-label">Theoretical Background</div>
+    <p>
+      The game draws on Bogost&rsquo;s concept of <em>procedural rhetoric</em> &mdash; the idea that a game&rsquo;s rules are its argument. The bias isn&rsquo;t explained through text; it emerges from the system the player operates within. Grounded in research on word embedding bias (Bolukbasi et al., 2016) and the notion that prototypes themselves constitute theory (Galey &amp; Ruecker, 2010).
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2026 Anne Kinigadner-Walch &middot; University of Vienna
+    <br>
+    <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+    <!-- Update the link above once your repo exists -->
+  </footer>
+
+</main>
+
+</body>
+</html>
