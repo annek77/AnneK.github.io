@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palindromes — Things That Made Me Think Today</title>
+<style>
+  :root {
+    --bg: #1a1a1a;
+    --bg-card: #222;
+    --bg-warm: #1e1a14;
+    --border: #333;
+    --text: #e8e0d4;
+    --text-muted: #999;
+    --gold: #C4A265;
+    --gold-soft: rgba(196, 162, 101, 0.12);
+    --gold-glow: rgba(196, 162, 101, 0.06);
+    --ochre: #8B6832;
+    --umber: #2E1E0A;
+    --font-body: Georgia, 'Times New Roman', serif;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 80px 24px 60px;
+    animation: fadeUp 0.8s ease-out;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .back {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+    display: inline-block;
+    margin-bottom: 48px;
+  }
+  .back:hover { color: var(--gold); }
+  .back::before { content: '\2190\00a0\00a0'; }
+
+  .date-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    color: var(--gold);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  .intro {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    font-style: italic;
+    max-width: 52ch;
+    margin-bottom: 20px;
+  }
+
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--ochre);
+    border: none;
+    margin-bottom: 56px;
+  }
+
+  /* ── Section Labels ── */
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 28px;
+    margin-top: 64px;
+  }
+
+  .section-label:first-of-type {
+    margin-top: 0;
+  }
+
+  /* ── Palindrome Words — flowing golden river ── */
+  .word-river {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-bottom: 20px;
+    line-height: 1;
+  }
+
+  .word-pill {
+    position: relative;
+    padding: 10px 20px;
+    margin: 4px;
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    background: var(--bg-warm);
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    cursor: default;
+    transition: all 0.4s ease;
+    overflow: hidden;
+  }
+
+  .word-pill:hover {
+    background: var(--gold);
+    color: var(--bg);
+    border-color: var(--gold);
+    transform: scale(1.05);
+  }
+
+  .word-pill .mirror {
+    display: none;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--ochre);
+    margin-top: 2px;
+  }
+
+  /* ── Palindrome Sentences — the mirror cards ── */
+  .mirror-card {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 32px 28px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+
+  .mirror-card:hover {
+    border-color: var(--gold);
+  }
+
+  .mirror-card:hover .sentence-reflected {
+    opacity: 0.2;
+  }
+
+  .sentence-forward {
+    font-size: 1.2rem;
+    color: var(--gold);
+    position: relative;
+    z-index: 1;
+    line-height: 1.5;
+  }
+
+  .sentence-reflected {
+    font-size: 1.2rem;
+    color: var(--ochre);
+    opacity: 0.08;
+    transform: scaleY(-1);
+    line-height: 1.5;
+    margin-top: 4px;
+    transition: opacity 0.4s ease;
+    user-select: none;
+    position: relative;
+    z-index: 0;
+  }
+
+  .sentence-reflected::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(to top, var(--bg-card) 20%, transparent 100%);
+  }
+
+  /* ── Center dot — marks the axis of symmetry ── */
+  .axis-dot {
+    display: block;
+    width: 4px;
+    height: 4px;
+    background: var(--ochre);
+    border-radius: 50%;
+    margin: 12px auto;
+    opacity: 0.5;
+  }
+
+  /* ── Fun fact callout ── */
+  .callout {
+    background: var(--gold-soft);
+    border-left: 3px solid var(--ochre);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin: 48px 0;
+    font-size: 0.92rem;
+    color: var(--text);
+  }
+
+  .callout strong {
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  /* ── Try It Yourself ── */
+  .try-it {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    margin-top: 48px;
+    text-align: center;
+  }
+
+  .try-it label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 16px;
+  }
+
+  .try-it input {
+    font-family: var(--font-body);
+    font-size: 1.4rem;
+    text-align: center;
+    letter-spacing: 0.12em;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    color: var(--gold);
+    padding: 8px 0;
+    width: 100%;
+    max-width: 400px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .try-it input:focus {
+    border-bottom-color: var(--gold);
+  }
+
+  .try-it .result {
+    margin-top: 16px;
+    font-size: 1rem;
+    min-height: 1.7em;
+    transition: all 0.3s;
+  }
+
+  .result-yes { color: var(--gold); }
+  .result-no { color: var(--text-muted); }
+
+  .reversed-preview {
+    font-size: 1.2rem;
+    color: var(--ochre);
+    opacity: 0.3;
+    letter-spacing: 0.12em;
+    margin-top: 8px;
+    min-height: 1.5em;
+    transform: scaleY(-1);
+  }
+
+  /* ── Footer ── */
+  footer {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+  footer a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+  footer a:hover { color: var(--text); }
+
+  @media (max-width: 560px) {
+    .page { padding: 48px 18px 40px; }
+    .mirror-card { padding: 24px 20px; }
+    .sentence-forward, .sentence-reflected { font-size: 1rem; }
+    .word-pill { font-size: 0.92rem; padding: 8px 16px; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <a href="./" class="back">All entries</a>
+
+  <div class="date-label">13 March 2026</div>
+  <h1>Palindromes</h1>
+  <p class="intro">Words and sentences that read the same forwards and backwards. A mirror hidden in language, waiting to be noticed.</p>
+  <hr class="divider">
+
+  <!-- ── Single Words ── -->
+  <div class="section-label">Single Words</div>
+
+  <div class="word-river">
+    <span class="word-pill">level</span>
+    <span class="word-pill">radar</span>
+    <span class="word-pill">madam</span>
+    <span class="word-pill">civic</span>
+    <span class="word-pill">refer</span>
+    <span class="word-pill">rotor</span>
+    <span class="word-pill">kayak</span>
+    <span class="word-pill">racecar</span>
+    <span class="word-pill">redder</span>
+    <span class="word-pill">reviver</span>
+    <span class="word-pill">repaper</span>
+    <span class="word-pill">deified</span>
+    <span class="word-pill">minim</span>
+    <span class="word-pill">stats</span>
+    <span class="word-pill">solos</span>
+    <span class="word-pill">tenet</span>
+    <span class="word-pill">wow</span>
+    <span class="word-pill">mom</span>
+    <span class="word-pill">noon</span>
+    <span class="word-pill">pop</span>
+  </div>
+
+  <div class="callout">
+    <strong>The shortest palindrome?</strong> Any single letter. The longest English single-word palindrome in common use is <em>racecar</em> — seven letters, perfectly mirrored around the &lsquo;e&rsquo;.
+  </div>
+
+  <!-- ── Sentences ── -->
+  <div class="section-label">Sentences &amp; Phrases</div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">Madam, I'm Adam.</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">Madam, I'm Adam.</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">Able was I ere I saw Elba.</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">Able was I ere I saw Elba.</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">Never odd or even.</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">Never odd or even.</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">Was it a rat I saw?</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">Was it a rat I saw?</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">Step on no pets.</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">Step on no pets.</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">Do geese see God?</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">Do geese see God?</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">A man, a plan, a canal, Panama!</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">A man, a plan, a canal, Panama!</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">Eva, can I see bees in a cave?</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">Eva, can I see bees in a cave?</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">Mr. Owl ate my metal worm.</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">Mr. Owl ate my metal worm.</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">Lisa Bonet ate no basil.</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">Lisa Bonet ate no basil.</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">Go hang a salami, I'm a lasagna hog.</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">Go hang a salami, I'm a lasagna hog.</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">Rise to vote, sir.</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">Rise to vote, sir.</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">No lemon, no melon.</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">No lemon, no melon.</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">Too hot to hoot.</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">Too hot to hoot.</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">Yo, banana boy!</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">Yo, banana boy!</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">Taco cat.</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">Taco cat.</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">Borrow or rob?</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">Borrow or rob?</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">Dammit, I'm mad!</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">Dammit, I'm mad!</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">Murder for a jar of red rum.</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">Murder for a jar of red rum.</div>
+  </div>
+
+  <div class="mirror-card">
+    <div class="sentence-forward">Some men interpret nine memos.</div>
+    <span class="axis-dot"></span>
+    <div class="sentence-reflected" aria-hidden="true">Some men interpret nine memos.</div>
+  </div>
+
+  <!-- ── Try It Yourself ── -->
+  <div class="try-it">
+    <label>Type a word — is it a palindrome?</label>
+    <input type="text" id="palindrome-input" placeholder="type here..." autocomplete="off" spellcheck="false">
+    <div class="reversed-preview" id="reversed-preview"></div>
+    <div class="result" id="palindrome-result"></div>
+  </div>
+
+  <footer>
+    &copy; 2026 Anne Kinigadner-Walch &middot;
+    <a href="./">All entries</a> &middot;
+    <a href="../">Home</a>
+  </footer>
+
+</main>
+
+<script>
+  const input = document.getElementById('palindrome-input');
+  const result = document.getElementById('palindrome-result');
+  const preview = document.getElementById('reversed-preview');
+
+  input.addEventListener('input', () => {
+    const raw = input.value;
+    const clean = raw.replace(/[^a-zA-Z]/g, '').toLowerCase();
+    const reversed = raw.split('').reverse().join('');
+
+    preview.textContent = raw ? reversed : '';
+
+    if (clean.length < 2) {
+      result.textContent = '';
+      result.className = 'result';
+      return;
+    }
+
+    const isPalindrome = clean === clean.split('').reverse().join('');
+    if (isPalindrome) {
+      result.textContent = 'Yes — a palindrome.';
+      result.className = 'result result-yes';
+    } else {
+      result.textContent = 'Not a palindrome.';
+      result.className = 'result result-no';
+    }
+  });
+</script>
+</body>
+</html>
