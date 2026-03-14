@@ -1,4 +1,5 @@
 // Palindrom word lists (real English palindromes) grouped by difficulty
+// Palindrom word lists (real English palindromes) grouped by difficulty
 export const palindromeData = {
   short: [
     'aha', 'bib', 'bob', 'cec', 'dad',
