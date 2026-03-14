@@ -1,5 +1,3 @@
-// Palindrom word lists (real English palindromes) grouped by difficulty
-// Palindrom word lists (real English palindromes) grouped by difficulty
 export const palindromeData = {
   short: [
     'aha', 'bib', 'bob', 'cec', 'dad',
@@ -13,9 +11,8 @@ export const palindromeData = {
     'denned', 'revver', 'selles', 'sesses', 'succus'
   ],
   long: [
-    'redivider', 'detartrated', 'rotavator',
-    'tattarrattat', 'aibohphobia', 'malayalam',
-    'deleveled', 'evitative', 'kinnikinnik',
-    'releveler'
+    'redivider', 'detartrated', 'rotavator', 'tattarrattat',
+    'aibohphobia', 'malayalam', 'deleveled', 'evitative',
+    'kinnikinnik', 'releveler'
   ]
 };
