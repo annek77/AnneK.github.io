@@ -4,38 +4,53 @@ import { Game } from './game.js';
 import * as ui from './ui.js';
 import { toggleAudio } from './audio.js';
 
-let game;
+let game = null;
 let playing = false;
 
+function setSoundVisualState(isOn) {
+  document.body.classList.toggle('sound-is-off', !isOn);
+
+  if (typeof ui.updateSoundIcon === 'function') {
+    ui.updateSoundIcon();
+  }
+}
+
 function startGame() {
+  if (!game) return;
+
   ui.showScreen('play');
   ui.hideGameOver();
+  ui.hideInstructions?.();
 
   requestAnimationFrame(() => {
     playing = true;
     game.start();
+    ui.hidePause?.();
   });
 }
 
 function restartGame() {
+  if (!game) return;
+
   ui.showScreen('play');
   ui.hideGameOver();
 
   requestAnimationFrame(() => {
     playing = true;
     game.start();
+    ui.hidePause?.();
   });
 }
 
 function togglePause() {
-  if (!playing) return;
+  if (!game || !playing) return;
 
   if (game.running) {
     game.pause();
-    ui.showPause();
+    ui.showPause?.();
   } else {
     game.resume();
-    ui.hidePause();
+    ui.hidePause?.();
   }
 }
 
@@ -43,22 +58,29 @@ function init() {
   const bestKey = 'palindromEchoBest';
   const savedBest = parseInt(localStorage.getItem(bestKey) || '0', 10);
 
-  ui.updateBest(savedBest);
-  ui.updateScore(0);
-  ui.updateTier('short');
-  ui.updateSoundIcon();
+  ui.updateScore?.(0);
+  ui.updateBest?.(savedBest);
+  ui.updateTier?.('short');
 
   const canvas = document.getElementById('game-canvas');
+  if (!canvas) {
+    console.error('Canvas element #game-canvas not found.');
+    return;
+  }
 
   game = new Game(
     canvas,
-    (score) => ui.updateScore(score),
+    (score) => {
+      ui.updateScore?.(score);
+    },
     (score, best) => {
       playing = false;
-      ui.updateBest(best);
-      ui.showGameOver(score, best);
+      ui.updateBest?.(best);
+      ui.showGameOver?.(score, best);
     },
-    (tier) => ui.updateTier(tier)
+    (tier) => {
+      ui.updateTier?.(tier);
+    }
   );
 
   const startBtn = document.getElementById('start-btn');
@@ -68,47 +90,45 @@ function init() {
   const restartBtn = document.getElementById('restart-btn');
   const soundButtons = document.querySelectorAll('.sound-toggle');
 
-  if (startBtn) {
-    startBtn.addEventListener('click', startGame);
-  }
+  startBtn?.addEventListener('click', startGame);
 
-  if (howBtn) {
-    howBtn.addEventListener('click', () => {
-      ui.showInstructions();
-    });
-  }
+  howBtn?.addEventListener('click', () => {
+    ui.showInstructions?.();
+  });
 
-  if (closeHowBtn) {
-    closeHowBtn.addEventListener('click', () => {
-      ui.hideInstructions();
-    });
-  }
+  closeHowBtn?.addEventListener('click', () => {
+    ui.hideInstructions?.();
+  });
 
-  if (pauseBtn) {
-    pauseBtn.addEventListener('click', togglePause);
-  }
+  pauseBtn?.addEventListener('click', () => {
+    togglePause();
+  });
 
-  if (restartBtn) {
-    restartBtn.addEventListener('click', restartGame);
-  }
+  restartBtn?.addEventListener('click', () => {
+    restartGame();
+  });
 
   soundButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
-      toggleAudio();
-      ui.updateSoundIcon();
+      const isOn = toggleAudio();
+      setSoundVisualState(isOn);
     });
   });
 
-  window.addEventListener('keydown', (e) => {
-    if (!playing) return;
+  window.addEventListener('keydown', (event) => {
+    if (!playing || !game) return;
 
-    if (e.key === 'Escape') {
+    if (event.key === 'Escape') {
+      event.preventDefault();
       togglePause();
       return;
     }
 
-    game.handleKey(e.key);
+    game.handleKey(event.key);
   });
+
+  // default sound state = on
+  setSoundVisualState(true);
 }
 
 window.addEventListener('DOMContentLoaded', init);
