@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palindrom Echo – A Typing Garden</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Intro / Hero Section -->
+    <section id="intro" class="screen intro">
+      <div class="hero">
+        <span class="label hero-label">A TYPING GARDEN</span>
+        <h1 class="hero-title">Palindrom&nbsp;Echo</h1>
+        <p class="hero-desc">Resolve drifting echoes through careful typing.</p>
+        <div class="hero-buttons">
+          <button id="start-btn" class="btn primary">Start</button>
+          <button id="how-btn" class="btn ghost">How&nbsp;to&nbsp;Play</button>
+          <button id="sound-btn" class="btn ghost sound-toggle" aria-label="Toggle sound" title="Toggle sound"></button>
+        </div>
+      </div>
+      <!-- How‑To Panel -->
+      <div id="how-panel" class="panel hidden">
+        <h2>How to Play</h2>
+        <p>Drifting echoes carry single‑word palindromes. Type a palindrome to resolve its echo and let it bloom. Keep the garden clear of unresolved forms.</p>
+        <ul>
+          <li>Click <em>Start</em> to begin.</li>
+          <li>Focus on an echo by typing its first letter.</li>
+          <li>Continue typing to complete the word; your progress is highlighted.</li>
+          <li>Resolved echoes disappear in a warm glow, adding to your score.</li>
+          <li>If too many echoes reach the bottom, the garden becomes overgrown.</li>
+          <li>Press <kbd>Esc</kbd> to pause or resume at any time.</li>
+        </ul>
+        <button id="close-how" class="btn primary small">Close</button>
+      </div>
+    </section>
+
+    <!-- Gameplay Section -->
+    <section id="play" class="screen play hidden">
+      <div id="game-container" class="game-container">
+        <canvas id="game-canvas"></canvas>
+        <!-- HUD -->
+        <div id="hud" class="hud">
+          <div class="score-board">
+            <div class="stat">
+              <span class="label">Score</span><span id="score" class="value">0</span>
+            </div>
+            <div class="stat">
+              <span class="label">Best</span><span id="best" class="value">0</span>
+            </div>
+            <div class="stat">
+              <span class="label">Tier</span><span id="tier" class="value">—</span>
+            </div>
+          </div>
+          <div class="controls">
+            <button id="pause-btn" class="btn ghost small">Pause</button>
+            <button id="sound-btn-play" class="btn ghost sound-toggle small" aria-label="Toggle sound" title="Toggle sound"></button>
+          </div>
+        </div>
+        <!-- Game Over Panel -->
+        <div id="game-over" class="panel hidden">
+          <h2>Garden&nbsp;Overgrown</h2>
+          <p>Your field filled with unresolved echoes. Rest and try again.</p>
+          <div class="final-score">
+            <div><span class="label">Score</span><span id="final-score" class="value">0</span></div>
+            <div><span class="label">Best</span><span id="final-best" class="value">0</span></div>
+          </div>
+          <button id="restart-btn" class="btn primary">Play&nbsp;Again</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Small‑Screen Fallback -->
+    <section id="small-screen" class="small-screen hidden">
+      <p>This experience is designed for larger screens. Please resize your window or use a desktop for the best experience.</p>
+    </section>
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
