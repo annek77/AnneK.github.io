@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Anne Kinigadner-Walch</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--camel-deep:#2A1F14;--camel-dark:#3D2E1E;--camel-mid:#6B5239;--camel-warm:#8B6832;--camel-tan:#C4A265;--camel-light:#D4B87A;--camel-cream:#E8D5B0;--camel-pale:#F2E6D0;--text-body:#E0D0B8;--text-muted:#B09878;--text-dim:#8B7A60;--text-ghost:#6B5A42;--surface:rgba(42,31,20,0.7);--border-warm:rgba(196,162,101,0.2);--border-subtle:rgba(196,162,101,0.12);--border-ghost:rgba(196,162,101,0.08);--font-display:'Newsreader',Georgia,serif;--font-body:'DM Sans',sans-serif;--font-mono:'JetBrains Mono',monospace}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);background:var(--camel-dark);color:var(--text-body);font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.top-leo{background:var(--camel-tan);position:relative;overflow:hidden}
+.top-leo::before{content:'';position:absolute;inset:0;z-index:0;opacity:0.07;pointer-events:none;mix-blend-mode:multiply;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><defs><pattern id="l" x="0" y="0" width="300" height="300" patternUnits="userSpaceOnUse"><rect width="300" height="300" fill="%23C4A265"/><path d="M32,28C38,18 52,16 58,24C62,29 60,38 54,42C48,36 42,34 36,36C30,38 28,34 32,28Z" fill="%231A1008" opacity="0.88"/><path d="M130,22C140,14 156,18 160,28C164,36 158,46 148,48C142,40 136,36 130,38C124,40 122,32 130,22Z" fill="%231A1008" opacity="0.9"/><path d="M230,18C238,10 254,12 260,22C264,30 258,40 250,44C244,36 238,32 232,34C226,36 224,28 230,18Z" fill="%231A1008" opacity="0.87"/><path d="M120,100C128,88 148,90 154,102C158,112 150,124 140,128C134,118 126,114 120,116C112,118 110,108 120,100Z" fill="%231A1008" opacity="0.92"/><path d="M148,195C156,184 174,186 180,198C184,208 176,220 168,224C162,214 154,210 148,212C140,214 138,204 148,195Z" fill="%231A1008" opacity="0.91"/></pattern></defs><rect width="300" height="300" fill="url(%23l)"/></svg>');background-repeat:repeat;background-size:300px 300px}
+.header-inner{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:24px 32px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--camel-deep);text-decoration:none}
+nav{display:flex;gap:32px}
+nav a{font-family:var(--font-body);font-size:14px;font-weight:600;color:rgba(42,31,20,0.55);text-decoration:none;transition:color 0.3s}
+nav a:hover,nav a.active{color:var(--camel-deep)}
+nav a.active{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px;text-decoration-color:rgba(42,31,20,0.3)}
+.ochre-fade{height:100px;background:linear-gradient(to bottom,#C4A265 0%,#B89755 20%,#9A7D44 45%,#6B5A38 70%,#4D3D28 90%,#3D2E1E 100%)}
+.page{max-width:720px;margin:0 auto;padding:48px 32px 60px}
+.back{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--text-dim);text-decoration:none;transition:color 0.3s;margin-bottom:32px}
+.back:hover{color:var(--camel-tan)}
+.back span{transition:transform 0.3s}.back:hover span{transform:translateX(-3px)}
+.section-label{font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:var(--camel-warm);margin-bottom:16px}
+h1{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:500;line-height:1.15;color:var(--camel-cream);margin-bottom:12px}
+.lede{font-size:15px;color:var(--text-muted);margin-bottom:32px;max-width:540px;line-height:1.8}
+.tag{display:inline-block;font-family:var(--font-mono);font-size:10px;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;color:var(--camel-tan);background:rgba(196,162,101,0.06);border:1px solid var(--border-subtle);border-radius:100px;padding:4px 14px;margin-right:6px;margin-bottom:6px}
+.img-placeholder{width:100%;border-radius:14px;background:linear-gradient(135deg,rgba(196,162,101,0.06),rgba(139,104,50,0.12));border:1px solid var(--border-subtle);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;margin:32px 0}
+.img-placeholder span{font-family:var(--font-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--text-ghost)}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:32px 0}
+.stat{background:var(--surface);border:1px solid var(--border-ghost);border-radius:10px;padding:22px 20px;text-align:center}
+.stat-num{font-family:var(--font-display);font-size:32px;font-weight:400;color:var(--camel-tan);display:block}
+.stat-label{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-ghost);margin-top:4px}
+.case-label{font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:var(--camel-warm);margin:48px 0 16px}
+h2{font-family:var(--font-display);font-size:22px;font-weight:400;line-height:1.25;color:var(--camel-cream);margin-bottom:16px}
+.page p{font-size:14px;line-height:1.8;color:var(--text-body);margin-bottom:14px;max-width:600px}
+.pullquote{font-family:var(--font-display);font-size:20px;font-weight:400;font-style:italic;color:var(--camel-tan);padding:24px 0 24px 24px;border-left:3px solid rgba(196,162,101,0.25);margin:28px 0;line-height:1.5}
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--border-warm),transparent);margin:48px 0}
+footer{max-width:720px;margin:0 auto;padding:32px 32px 48px;border-top:1px solid var(--border-ghost);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-ghost)}
+footer a{color:var(--text-ghost);text-decoration:none;transition:color 0.3s}footer a:hover{color:var(--camel-tan)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.page{animation:fadeUp .6s ease-out}
+@media(max-width:680px){.header-inner{flex-direction:column;align-items:flex-start;gap:16px;padding:20px}nav{gap:20px}.page{padding:32px 20px 48px}.stats-row{grid-template-columns:1fr}footer{flex-direction:column;gap:16px;align-items:flex-start;padding:24px 20px 40px}}
+</style>
+</head>
+<body>
+<div class="top-leo"><div class="header-inner"><a href="../" class="logo">A.KW</a><nav><a href="./" class="active">Projects</a><a href="../about/">About</a><a href="../laugh/">Laugh</a><a href="../move/">Move</a><a href="../think/">Think</a><a href="../people/">People</a></nav></div></div>
+<div class="ochre-fade"></div>
+
+<div class="page">
+  <a href="../" class="back"><span>&larr;</span> Home</a>
+
+  <div class="section-label">Project</div>
+  <div style="margin-bottom:12px"><span class="tag">Twine</span><span class="tag">Serious Game</span><span class="tag">AI Ethics</span><span class="tag">Procedural Rhetoric</span></div>
+  <h1>Hiring Algorithm</h1>
+  <p class="lede">A narrative game where you step into the role of an automated HR system. The bias isn't explained — it's produced by your own decisions.</p>
+
+  <div class="img-placeholder"><span>Game Screenshot — Coming Soon</span></div>
+
+  <div class="stats-row">
+    <div class="stat"><span class="stat-num">1</span><span class="stat-label">Prototype</span></div>
+    <div class="stat"><span class="stat-num">SS26</span><span class="stat-label">Semester</span></div>
+    <div class="stat"><span class="stat-num">Sep</span><span class="stat-label">Deadline</span></div>
+  </div>
+
+  <div class="case-label">Challenge</div>
+  <h2>Making invisible bias tangible</h2>
+  <p>Algorithmic bias is abstract. You can read about it, watch talks about it, agree that it's a problem — and still not feel how it works. The challenge: create an experience where bias isn't a topic, but something the player actively produces.</p>
+
+  <div class="case-label">Approach</div>
+  <h2>Procedural rhetoric as method</h2>
+  <p>Bogost's concept of procedural rhetoric says that a game's rules carry the argument — not its text, not its cutscenes. The Hiring Algorithm uses this principle: the player evaluates candidates through mechanics that encode real biases from Bolukbasi et al.'s research on word embeddings.</p>
+  <p>"Man is to computer programmer as woman is to homemaker." That's not an opinion — it's a geometric relationship in the data. The game turns that geometry into decisions you make with your own hands.</p>
+
+  <div class="pullquote">The prototype is a theory about how algorithmic bias works. Contestable, defensible, substantive.</div>
+
+  <p>Following Galey & Ruecker's framework, the prototype itself is a form of argumentation. Each version captures a specific claim about how bias operates, open for criticism and iteration.</p>
+
+  <div class="case-label">Built With</div>
+  <h2>Twine + GitHub Pages</h2>
+  <p>Twine handles the branching narrative structure. The game exports as a single HTML file, hosted directly on GitHub Pages. No backend, no dependencies — the whole argument lives in one self-contained page.</p>
+  <p>Built for the Gaming Seminar SS2026 at the University of Vienna (Instructor: Arndt Niebisch). The course explores gaming mechanisms in art and humanities, with a focus on user-centric design and prototyping.</p>
+
+  <div class="divider"></div>
+
+  <div class="stat" style="text-align:left;margin:0;background:transparent;border:none;padding:0">
+    <span class="stat-label">Status</span>
+    <p style="color:var(--camel-light);margin-top:8px">In development. First Twine sketches in progress. User testing and iterative documentation planned for the semester. Final paper + game due 15 September 2026.</p>
+  </div>
+</div>
+
+<footer><span>&copy; 2026 Anne Kinigadner-Walch</span><a href="https://github.com/annek77" target="_blank" rel="noopener">GitHub</a></footer>
+</body>
+</html>
