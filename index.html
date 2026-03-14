@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anne Kinigadner-Walch</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --camel-deep:#2A1F14;--camel-dark:#3D2E1E;--camel-mid:#6B5239;--camel-warm:#8B6832;
+  --camel-tan:#C4A265;--camel-light:#D4B87A;--camel-cream:#E8D5B0;--camel-pale:#F2E6D0;
+  --text-body:#E0D0B8;--text-muted:#B09878;--text-dim:#8B7A60;--text-ghost:#6B5A42;
+  --surface:rgba(42,31,20,0.7);--border-warm:rgba(196,162,101,0.2);
+  --border-subtle:rgba(196,162,101,0.12);--border-ghost:rgba(196,162,101,0.08);
+  --font-display:'Newsreader',Georgia,serif;--font-body:'DM Sans',sans-serif;--font-mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);background:var(--camel-dark);color:var(--text-body);font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:6px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(196,162,101,0.2);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:rgba(196,162,101,0.35)}
+
+/* ── Header ── */
+.top-leo{background:var(--camel-tan);position:relative;overflow:hidden}
+.top-leo::before{content:'';position:absolute;inset:0;z-index:0;opacity:0.07;pointer-events:none;mix-blend-mode:multiply;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><defs><pattern id="l" x="0" y="0" width="300" height="300" patternUnits="userSpaceOnUse"><rect width="300" height="300" fill="%23C4A265"/><path d="M32,28C38,18 52,16 58,24C62,29 60,38 54,42C48,36 42,34 36,36C30,38 28,34 32,28Z" fill="%231A1008" opacity="0.88"/><path d="M28,40C24,48 30,56 38,54C34,50 32,44 28,40Z" fill="%232E1E0A" opacity="0.82"/><path d="M130,22C140,14 156,18 160,28C164,36 158,46 148,48C142,40 136,36 130,38C124,40 122,32 130,22Z" fill="%231A1008" opacity="0.9"/><path d="M230,18C238,10 254,12 260,22C264,30 258,40 250,44C244,36 238,32 232,34C226,36 224,28 230,18Z" fill="%231A1008" opacity="0.87"/><path d="M18,110C26,100 42,102 48,114C52,122 46,132 38,136C32,128 26,124 20,126C14,128 12,120 18,110Z" fill="%231A1008" opacity="0.9"/><path d="M120,100C128,88 148,90 154,102C158,112 150,124 140,128C134,118 126,114 120,116C112,118 110,108 120,100Z" fill="%231A1008" opacity="0.92"/><path d="M228,108C236,98 252,100 258,110C262,118 256,130 248,134C242,124 236,120 230,122C224,124 222,116 228,108Z" fill="%231A1008" opacity="0.88"/><path d="M36,200C44,190 60,192 66,204C70,212 64,224 56,228C50,218 44,214 38,216C32,218 30,210 36,200Z" fill="%231A1008" opacity="0.9"/><path d="M148,195C156,184 174,186 180,198C184,208 176,220 168,224C162,214 154,210 148,212C140,214 138,204 148,195Z" fill="%231A1008" opacity="0.91"/><path d="M244,200C252,190 268,192 274,204C278,212 272,224 264,228C258,218 252,214 246,216C240,218 238,210 244,200Z" fill="%231A1008" opacity="0.89"/></pattern></defs><rect width="300" height="300" fill="url(%23l)"/></svg>');background-repeat:repeat;background-size:300px 300px}
+.header-inner{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:24px 32px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--camel-deep);text-decoration:none}
+nav{display:flex;gap:32px}
+nav a{font-family:var(--font-body);font-size:14px;font-weight:600;color:rgba(42,31,20,0.55);text-decoration:none;transition:color 0.3s}
+nav a:hover,nav a.active{color:var(--camel-deep)}
+nav a.active{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px;text-decoration-color:rgba(42,31,20,0.3)}
+
+/* ── Hero (on ochre, no pattern) ── */
+.hero{background:var(--camel-tan);padding:32px 0 72px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-100px;right:-80px;width:450px;height:450px;background:radial-gradient(circle,rgba(212,184,122,0.35) 0%,transparent 70%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:0 32px}
+.hero-label{font-family:var(--font-mono);font-size:10px;letter-spacing:5px;text-transform:uppercase;color:rgba(42,31,20,0.5);margin-bottom:16px;animation:fadeUp .6s ease-out .1s both}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.4rem,5.5vw,3.8rem);font-weight:500;line-height:1.12;color:var(--camel-deep);margin-bottom:16px;animation:fadeUp .6s ease-out .25s both}
+.hero h1 em{font-style:italic;color:var(--camel-dark)}
+.hero p{font-size:15px;font-weight:400;color:rgba(42,31,20,0.6);max-width:480px;line-height:1.8;animation:fadeUp .6s ease-out .4s both}
+
+/* ── Ochre → Dark fade ── */
+.ochre-fade{height:100px;background:linear-gradient(to bottom,#C4A265 0%,#B89755 20%,#9A7D44 45%,#6B5A38 70%,#4D3D28 90%,#3D2E1E 100%);position:relative}
+.ochre-fade::before{content:'';position:absolute;inset:0;opacity:0.05;mix-blend-mode:multiply;pointer-events:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><defs><pattern id="l" x="0" y="0" width="300" height="300" patternUnits="userSpaceOnUse"><rect width="300" height="300" fill="%23C4A265"/><path d="M32,28C38,18 52,16 58,24C62,29 60,38 54,42C48,36 42,34 36,36C30,38 28,34 32,28Z" fill="%231A1008" opacity="0.88"/><path d="M130,22C140,14 156,18 160,28C164,36 158,46 148,48C142,40 136,36 130,38C124,40 122,32 130,22Z" fill="%231A1008" opacity="0.9"/><path d="M120,100C128,88 148,90 154,102C158,112 150,124 140,128C134,118 126,114 120,116C112,118 110,108 120,100Z" fill="%231A1008" opacity="0.92"/></pattern></defs><rect width="300" height="300" fill="url(%23l)"/></svg>');background-repeat:repeat;background-size:300px 300px}
+
+/* ── Dark zone ── */
+.dark-zone{padding:64px 0 48px}
+.content{max-width:720px;margin:0 auto;padding:0 32px}
+
+/* ── Section Label ── */
+.section-label{font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:var(--camel-warm);margin-bottom:28px}
+
+/* ── Featured Card ── */
+.featured{background:var(--surface);border:1px solid var(--border-subtle);border-radius:14px;padding:36px 32px;position:relative;overflow:hidden;transition:all 0.3s ease;cursor:pointer;text-decoration:none;display:block;color:inherit;margin-bottom:48px}
+.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--camel-warm),var(--camel-tan),var(--camel-warm))}
+.featured:hover{border-color:var(--border-warm);transform:translateY(-2px);box-shadow:0 12px 40px rgba(42,31,20,0.5)}
+.featured .tag-row{margin-bottom:14px}
+.featured h3{font-family:var(--font-display);font-size:24px;font-weight:500;line-height:1.25;color:var(--camel-light);margin-bottom:10px}
+.featured p{font-size:14px;color:var(--text-muted);max-width:540px;line-height:1.8}
+.featured .meta{font-family:var(--font-mono);font-size:10px;letter-spacing:1px;color:var(--text-ghost);margin-top:16px}
+
+/* ── Tags ── */
+.tag{display:inline-block;font-family:var(--font-mono);font-size:10px;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;color:var(--camel-tan);background:rgba(196,162,101,0.06);border:1px solid var(--border-subtle);border-radius:100px;padding:4px 14px;margin-right:6px;margin-bottom:6px}
+
+/* ── Scroll Track ── */
+.scroll-wrapper{position:relative;margin-bottom:48px}
+.scroll-wrapper::after{content:'';position:absolute;right:0;top:0;bottom:0;width:80px;background:linear-gradient(to right,transparent,var(--camel-dark));pointer-events:none;z-index:2}
+.scroll-track{display:flex;gap:14px;overflow-x:auto;overflow-y:hidden;padding-bottom:8px;margin-right:-32px;padding-right:64px;scrollbar-width:thin;scrollbar-color:rgba(196,162,101,0.15) transparent;-webkit-overflow-scrolling:touch}
+.scroll-card{min-width:260px;max-width:260px;flex-shrink:0;background:var(--surface);border:1px solid var(--border-ghost);border-radius:10px;padding:22px 20px;text-decoration:none;color:inherit;transition:all 0.3s ease}
+.scroll-card:hover{border-color:var(--border-warm);transform:translateY(-2px);box-shadow:0 8px 24px rgba(42,31,20,0.4)}
+.scroll-card .card-label{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--camel-warm);margin-bottom:10px}
+.scroll-card h3{font-family:var(--font-body);font-size:15px;font-weight:600;color:var(--camel-light);margin-bottom:6px}
+.scroll-card p{font-size:13px;color:var(--text-muted);line-height:1.6}
+
+/* ── Divider ── */
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--border-warm),transparent);margin:48px 0}
+
+/* ── Writing list ── */
+.writing-item{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--border-ghost);text-decoration:none;color:inherit;transition:all 0.3s ease}
+.writing-item:first-child{border-top:1px solid var(--border-ghost)}
+.writing-item:hover{padding-left:8px}
+.writing-item:hover .wi-title{color:var(--camel-light)}
+.wi-title{font-family:var(--font-body);font-size:14px;font-weight:500;color:var(--text-body);transition:color 0.3s}
+.wi-date{font-family:var(--font-mono);font-size:11px;color:var(--text-ghost);letter-spacing:1px;flex-shrink:0;margin-left:24px}
+
+/* ── Contact CTA ── */
+.cta{text-align:left;margin-top:48px}
+.cta h2{font-family:var(--font-display);font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:500;color:var(--camel-cream);margin-bottom:12px}
+.cta p{font-size:14px;color:var(--text-muted);margin-bottom:24px;max-width:440px}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{display:inline-block;font-family:var(--font-body);font-size:13px;font-weight:500;padding:10px 28px;background:linear-gradient(135deg,var(--camel-warm),var(--camel-mid));color:var(--camel-pale);border:none;border-radius:10px;text-decoration:none;box-shadow:0 4px 20px rgba(139,104,50,0.3),inset 0 1px 0 rgba(255,255,255,0.08);transition:all 0.3s ease;cursor:pointer}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(139,104,50,0.45),inset 0 1px 0 rgba(255,255,255,0.08)}
+.btn-ghost{display:inline-block;font-family:var(--font-body);font-size:13px;font-weight:500;padding:10px 28px;background:rgba(196,162,101,0.06);color:var(--camel-tan);border:1px solid var(--border-warm);border-radius:10px;text-decoration:none;transition:all 0.3s ease;cursor:pointer}
+.btn-ghost:hover{background:rgba(196,162,101,0.12);border-color:rgba(196,162,101,0.3)}
+
+/* ── Footer ── */
+footer{max-width:720px;margin:0 auto;padding:32px 32px 48px;border-top:1px solid var(--border-ghost);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-ghost)}
+footer a{color:var(--text-ghost);text-decoration:none;transition:color 0.3s}
+footer a:hover{color:var(--camel-tan)}
+
+/* ── Animations ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── Responsive ── */
+@media(max-width:680px){
+  .header-inner{flex-direction:column;align-items:flex-start;gap:16px;padding:20px 20px}
+  nav{gap:20px}
+  .hero-inner,.content{padding:0 20px}
+  .hero{padding:24px 0 48px}
+  .ochre-fade{height:60px}
+  .scroll-track{margin-right:-20px;padding-right:48px}
+  .scroll-card{min-width:230px;max-width:230px}
+  .writing-item{flex-direction:column;gap:4px}
+  .wi-date{margin-left:0}
+  .btn-row{flex-direction:column}.btn-primary,.btn-ghost{text-align:center;width:100%}
+  footer{flex-direction:column;gap:16px;align-items:flex-start;padding:24px 20px 40px}
+}
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<div class="top-leo">
+  <div class="header-inner">
+    <a href="./" class="logo">A.KW</a>
+    <nav>
+      <a href="projects/" class="active">Projects</a>
+      <a href="about/">About</a>
+      <a href="laugh/">Laugh</a>
+      <a href="move/">Move</a>
+      <a href="think/">Think</a>
+      <a href="people/">People</a>
+    </nav>
+  </div>
+</div>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Anne Kinigadner-Walch</div>
+    <h1>Building things that work <em>beautifully</em> under pressure.</h1>
+    <p>I study, build, run, read, and occasionally make games about the blind spots in algorithms. Based in Vienna.</p>
+  </div>
+</div>
+
+<!-- ── Fade ── -->
+<div class="ochre-fade"></div>
+
+<!-- ── Dark Zone ── -->
+<div class="dark-zone">
+<div class="content">
+
+  <!-- Selected Work -->
+  <div class="section-label">Selected Work</div>
+
+  <a href="projects/" class="featured">
+    <div class="tag-row">
+      <span class="tag">Twine</span>
+      <span class="tag">AI Ethics</span>
+      <span class="tag">Serious Game</span>
+    </div>
+    <h3>Hiring Algorithm</h3>
+    <p>A narrative game where you play as an HR algorithm. Screen candidates, make decisions, and watch bias emerge — not from bad intentions, but from the data itself.</p>
+    <div class="meta">In progress — University of Vienna, SS 2026</div>
+  </a>
+
+  <!-- Scroll Cards -->
+  <div class="scroll-wrapper">
+    <div class="scroll-track">
+      <a href="laugh/" class="scroll-card">
+        <div class="card-label">Laugh</div>
+        <h3>Things That Made Me Laugh</h3>
+        <p>Palindromes, absurdities, and words that refuse to behave.</p>
+      </a>
+      <a href="move/" class="scroll-card">
+        <div class="card-label">Move</div>
+        <h3>Things That Move Me</h3>
+        <p>Night runs, interval sessions, songs that bypass the brain entirely.</p>
+      </a>
+      <a href="think/" class="scroll-card">
+        <div class="card-label">Think</div>
+        <h3>Things That Make Me Think</h3>
+        <p>Papers, books, and arguments that stuck around after I closed the tab.</p>
+      </a>
+      <a href="people/" class="scroll-card">
+        <div class="card-label">People</div>
+        <h3>People That Move Me</h3>
+        <p>Friends who showed up. Days worth writing down.</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Writing -->
+  <div class="section-label">Recent</div>
+
+  <a href="laugh/palindrome_13-03-2026.html" class="writing-item">
+    <span class="wi-title">Palindromes — a mirror hiding in language</span>
+    <span class="wi-date">13 Mar 2026</span>
+  </a>
+  <a href="move/#run-12-03" class="writing-item">
+    <span class="wi-title">Intervals in the dark forest</span>
+    <span class="wi-date">12 Mar 2026</span>
+  </a>
+  <a href="people/#13-03" class="writing-item">
+    <span class="wi-title">Jana & Katy — the Einser we earned</span>
+    <span class="wi-date">13 Mar 2026</span>
+  </a>
+
+  <div class="divider"></div>
+
+  <!-- Contact -->
+  <div class="cta">
+    <div class="section-label">Get in Touch</div>
+    <h2>Let's talk.</h2>
+    <p>Questions, ideas, or just want to say hello — I'm always up for a good conversation.</p>
+    <div class="btn-row">
+      <a href="mailto:anne.kinigadner@gmail.com" class="btn-primary">Write me</a>
+      <a href="about/" class="btn-ghost">More about me</a>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer>
+  <span>&copy; 2026 Anne Kinigadner-Walch</span>
+  <a href="https://github.com/annek77" target="_blank" rel="noopener">GitHub</a>
+</footer>
+
+</body>
+</html>
