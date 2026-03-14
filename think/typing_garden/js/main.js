@@ -7,84 +7,107 @@ import { toggleAudio } from './audio.js';
 let game;
 let playing = false;
 
+function startGame() {
+  ui.showScreen('play');
+  ui.hideGameOver();
+
+  requestAnimationFrame(() => {
+    playing = true;
+    game.start();
+  });
+}
+
+function restartGame() {
+  ui.showScreen('play');
+  ui.hideGameOver();
+
+  requestAnimationFrame(() => {
+    playing = true;
+    game.start();
+  });
+}
+
+function togglePause() {
+  if (!playing) return;
+
+  if (game.running) {
+    game.pause();
+    ui.showPause();
+  } else {
+    game.resume();
+    ui.hidePause();
+  }
+}
+
 function init() {
-  // Initialize high score display
   const bestKey = 'palindromEchoBest';
-  const savedBest = parseInt(localStorage.getItem(bestKey) || '0');
+  const savedBest = parseInt(localStorage.getItem(bestKey) || '0', 10);
+
   ui.updateBest(savedBest);
   ui.updateScore(0);
   ui.updateTier('short');
   ui.updateSoundIcon();
 
   const canvas = document.getElementById('game-canvas');
+
   game = new Game(
     canvas,
-    score => ui.updateScore(score),
+    (score) => ui.updateScore(score),
     (score, best) => {
       playing = false;
       ui.updateBest(best);
       ui.showGameOver(score, best);
     },
-    tier => ui.updateTier(tier)
+    (tier) => ui.updateTier(tier)
   );
 
-  // Button events
-  document.getElementById('start-btn').addEventListener('click', () => {
-    ui.showScreen('play');
-    ui.hideGameOver();
-    playing = true;
-    game.start();
-  });
-
-  document.getElementById('how-btn').addEventListener('click', () => {
-    ui.showInstructions();
-  });
-  document.getElementById('close-how').addEventListener('click', () => {
-    ui.hideInstructions();
-  });
-
-  document.getElementById('pause-btn').addEventListener('click', () => {
-    if (!playing) return;
-    if (game.running) {
-      game.pause();
-      ui.showPause();
-    } else {
-      game.resume();
-      ui.hidePause();
-    }
-  });
-
-  document.getElementById('restart-btn').addEventListener('click', () => {
-    ui.showScreen('play');
-    ui.hideGameOver();
-    playing = true;
-    game.start();
-  });
-
-  // Sound toggles
+  const startBtn = document.getElementById('start-btn');
+  const howBtn = document.getElementById('how-btn');
+  const closeHowBtn = document.getElementById('close-how');
+  const pauseBtn = document.getElementById('pause-btn');
+  const restartBtn = document.getElementById('restart-btn');
   const soundButtons = document.querySelectorAll('.sound-toggle');
-  soundButtons.forEach(btn => {
+
+  if (startBtn) {
+    startBtn.addEventListener('click', startGame);
+  }
+
+  if (howBtn) {
+    howBtn.addEventListener('click', () => {
+      ui.showInstructions();
+    });
+  }
+
+  if (closeHowBtn) {
+    closeHowBtn.addEventListener('click', () => {
+      ui.hideInstructions();
+    });
+  }
+
+  if (pauseBtn) {
+    pauseBtn.addEventListener('click', togglePause);
+  }
+
+  if (restartBtn) {
+    restartBtn.addEventListener('click', restartGame);
+  }
+
+  soundButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
       toggleAudio();
       ui.updateSoundIcon();
     });
   });
 
-  // Keyboard controls
-  window.addEventListener('keydown', e => {
+  window.addEventListener('keydown', (e) => {
     if (!playing) return;
+
     if (e.key === 'Escape') {
-      // toggle pause
-      if (game.running) {
-        game.pause();
-        ui.showPause();
-      } else {
-        game.resume();
-        ui.hidePause();
-      }
-    } else {
-      game.handleKey(e.key);
+      togglePause();
+      return;
     }
+
+    game.handleKey(e.key);
   });
 }
 
