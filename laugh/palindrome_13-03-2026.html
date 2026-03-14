@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palindromes — Anne Kinigadner-Walch</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--camel-deep:#2A1F14;--camel-dark:#3D2E1E;--camel-mid:#6B5239;--camel-warm:#8B6832;--camel-tan:#C4A265;--camel-light:#D4B87A;--camel-cream:#E8D5B0;--camel-pale:#F2E6D0;--text-body:#E0D0B8;--text-muted:#B09878;--text-dim:#8B7A60;--text-ghost:#6B5A42;--surface:rgba(42,31,20,0.7);--border-warm:rgba(196,162,101,0.2);--border-subtle:rgba(196,162,101,0.12);--border-ghost:rgba(196,162,101,0.08);--font-display:'Newsreader',Georgia,serif;--font-body:'DM Sans',sans-serif;--font-mono:'JetBrains Mono',monospace}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);background:var(--camel-dark);color:var(--text-body);font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.top-leo{background:var(--camel-tan);position:relative;overflow:hidden}.top-leo::before{content:'';position:absolute;inset:0;z-index:0;opacity:0.07;pointer-events:none;mix-blend-mode:multiply;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><defs><pattern id="l" x="0" y="0" width="300" height="300" patternUnits="userSpaceOnUse"><rect width="300" height="300" fill="%23C4A265"/><path d="M32,28C38,18 52,16 58,24C62,29 60,38 54,42C48,36 42,34 36,36C30,38 28,34 32,28Z" fill="%231A1008" opacity="0.88"/><path d="M130,22C140,14 156,18 160,28C164,36 158,46 148,48C142,40 136,36 130,38C124,40 122,32 130,22Z" fill="%231A1008" opacity="0.9"/><path d="M120,100C128,88 148,90 154,102C158,112 150,124 140,128C134,118 126,114 120,116C112,118 110,108 120,100Z" fill="%231A1008" opacity="0.92"/></pattern></defs><rect width="300" height="300" fill="url(%23l)"/></svg>');background-repeat:repeat;background-size:300px 300px}
+.header-inner{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:24px 32px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--camel-deep);text-decoration:none}
+nav{display:flex;gap:32px}nav a{font-family:var(--font-body);font-size:14px;font-weight:600;color:rgba(42,31,20,0.55);text-decoration:none;transition:color 0.3s}nav a:hover,nav a.active{color:var(--camel-deep)}nav a.active{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px;text-decoration-color:rgba(42,31,20,0.3)}
+.ochre-fade{height:100px;background:linear-gradient(to bottom,#C4A265 0%,#B89755 20%,#9A7D44 45%,#6B5A38 70%,#4D3D28 90%,#3D2E1E 100%)}
+.page{max-width:720px;margin:0 auto;padding:48px 32px 60px;animation:fadeUp .6s ease-out}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.back{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--text-dim);text-decoration:none;transition:color 0.3s;margin-bottom:32px}.back:hover{color:var(--camel-tan)}.back span{transition:transform 0.3s}.back:hover span{transform:translateX(-3px)}
+.date{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-ghost);margin-bottom:12px}
+h1{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:500;line-height:1.15;color:var(--camel-cream);margin-bottom:12px}
+.lede{font-size:15px;color:var(--text-muted);margin-bottom:32px;max-width:480px;font-style:italic;line-height:1.8}
+.section-label{font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:var(--camel-warm);margin-bottom:20px;margin-top:48px}
+.words{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.pill{font-family:var(--font-mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--camel-tan);background:rgba(196,162,101,0.06);border:1px solid var(--border-subtle);border-radius:100px;padding:6px 16px;cursor:default;transition:all .3s}
+.pill:hover{background:var(--camel-warm);color:var(--camel-pale);border-color:var(--camel-warm);transform:scale(1.04)}
+.callout{font-family:var(--font-display);font-size:16px;font-style:italic;color:var(--camel-tan);padding:20px 0 20px 24px;border-left:3px solid rgba(196,162,101,0.25);margin:28px 0;line-height:1.6}
+.mirror{background:var(--surface);border:1px solid var(--border-ghost);border-radius:10px;padding:20px 22px;margin-bottom:10px;transition:border-color .3s;overflow:hidden}
+.mirror:hover{border-color:var(--border-warm)}
+.mirror:hover .ref{opacity:.3}
+.fwd{font-family:var(--font-display);font-size:18px;font-weight:400;color:var(--camel-cream);line-height:1.4}
+.dot{display:block;width:3px;height:3px;background:var(--camel-tan);border-radius:50%;margin:6px auto;opacity:.4}
+.ref{font-family:var(--font-display);font-size:18px;color:var(--camel-light);opacity:.12;transform:scaleY(-1);line-height:1.4;user-select:none;transition:opacity .4s;position:relative}
+.ref::after{content:'';position:absolute;bottom:0;left:0;right:0;height:100%;background:linear-gradient(to top,var(--surface) 15%,transparent 100%)}
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--border-warm),transparent);margin:48px 0}
+footer{max-width:720px;margin:0 auto;padding:32px 32px 48px;border-top:1px solid var(--border-ghost);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-ghost)}
+footer a{color:var(--text-ghost);text-decoration:none;transition:color 0.3s}footer a:hover{color:var(--camel-tan)}
+@media(max-width:680px){.header-inner{flex-direction:column;align-items:flex-start;gap:16px;padding:20px}nav{gap:20px}.page{padding:32px 20px 48px}.fwd,.ref{font-size:15px}footer{flex-direction:column;gap:16px;align-items:flex-start;padding:24px 20px 40px}}
+</style>
+</head>
+<body>
+<div class="top-leo"><div class="header-inner"><a href="../" class="logo">A.KW</a><nav><a href="../projects/">Projects</a><a href="../about/">About</a><a href="./" class="active">Laugh</a><a href="../move/">Move</a><a href="../think/">Think</a><a href="../people/">People</a></nav></div></div>
+<div class="ochre-fade"></div>
+
+<div class="page">
+  <a href="./" class="back"><span>&larr;</span> All entries</a>
+  <div class="date">13 March 2026</div>
+  <h1>Palindromes</h1>
+  <p class="lede">Words and sentences that read the same forwards and backwards. A mirror hiding in plain language.</p>
+
+  <div class="section-label">Single Words</div>
+  <div class="words">
+    <span class="pill">level</span><span class="pill">radar</span><span class="pill">madam</span><span class="pill">civic</span><span class="pill">refer</span><span class="pill">rotor</span><span class="pill">kayak</span><span class="pill">racecar</span><span class="pill">redder</span><span class="pill">reviver</span><span class="pill">repaper</span><span class="pill">deified</span><span class="pill">minim</span><span class="pill">stats</span><span class="pill">solos</span><span class="pill">tenet</span><span class="pill">wow</span><span class="pill">mom</span><span class="pill">noon</span><span class="pill">pop</span>
+  </div>
+
+  <div class="callout">The longest common English palindrome is <em>racecar</em> — seven letters mirrored around the 'e'.</div>
+
+  <div class="section-label">Sentences &amp; Phrases</div>
+
+  <div class="mirror"><div class="fwd">Madam, I'm Adam.</div><span class="dot"></span><div class="ref" aria-hidden="true">Madam, I'm Adam.</div></div>
+  <div class="mirror"><div class="fwd">Able was I ere I saw Elba.</div><span class="dot"></span><div class="ref" aria-hidden="true">Able was I ere I saw Elba.</div></div>
+  <div class="mirror"><div class="fwd">Never odd or even.</div><span class="dot"></span><div class="ref" aria-hidden="true">Never odd or even.</div></div>
+  <div class="mirror"><div class="fwd">Was it a rat I saw?</div><span class="dot"></span><div class="ref" aria-hidden="true">Was it a rat I saw?</div></div>
+  <div class="mirror"><div class="fwd">Step on no pets.</div><span class="dot"></span><div class="ref" aria-hidden="true">Step on no pets.</div></div>
+  <div class="mirror"><div class="fwd">Do geese see God?</div><span class="dot"></span><div class="ref" aria-hidden="true">Do geese see God?</div></div>
+  <div class="mirror"><div class="fwd">A man, a plan, a canal, Panama!</div><span class="dot"></span><div class="ref" aria-hidden="true">A man, a plan, a canal, Panama!</div></div>
+  <div class="mirror"><div class="fwd">Eva, can I see bees in a cave?</div><span class="dot"></span><div class="ref" aria-hidden="true">Eva, can I see bees in a cave?</div></div>
+  <div class="mirror"><div class="fwd">Mr. Owl ate my metal worm.</div><span class="dot"></span><div class="ref" aria-hidden="true">Mr. Owl ate my metal worm.</div></div>
+  <div class="mirror"><div class="fwd">Lisa Bonet ate no basil.</div><span class="dot"></span><div class="ref" aria-hidden="true">Lisa Bonet ate no basil.</div></div>
+  <div class="mirror"><div class="fwd">Go hang a salami, I'm a lasagna hog.</div><span class="dot"></span><div class="ref" aria-hidden="true">Go hang a salami, I'm a lasagna hog.</div></div>
+  <div class="mirror"><div class="fwd">Rise to vote, sir.</div><span class="dot"></span><div class="ref" aria-hidden="true">Rise to vote, sir.</div></div>
+  <div class="mirror"><div class="fwd">No lemon, no melon.</div><span class="dot"></span><div class="ref" aria-hidden="true">No lemon, no melon.</div></div>
+  <div class="mirror"><div class="fwd">Too hot to hoot.</div><span class="dot"></span><div class="ref" aria-hidden="true">Too hot to hoot.</div></div>
+  <div class="mirror"><div class="fwd">Yo, banana boy!</div><span class="dot"></span><div class="ref" aria-hidden="true">Yo, banana boy!</div></div>
+  <div class="mirror"><div class="fwd">Taco cat.</div><span class="dot"></span><div class="ref" aria-hidden="true">Taco cat.</div></div>
+  <div class="mirror"><div class="fwd">Borrow or rob?</div><span class="dot"></span><div class="ref" aria-hidden="true">Borrow or rob?</div></div>
+  <div class="mirror"><div class="fwd">Dammit, I'm mad!</div><span class="dot"></span><div class="ref" aria-hidden="true">Dammit, I'm mad!</div></div>
+  <div class="mirror"><div class="fwd">Murder for a jar of red rum.</div><span class="dot"></span><div class="ref" aria-hidden="true">Murder for a jar of red rum.</div></div>
+  <div class="mirror"><div class="fwd">Some men interpret nine memos.</div><span class="dot"></span><div class="ref" aria-hidden="true">Some men interpret nine memos.</div></div>
+</div>
+
+<footer><span>&copy; 2026 Anne Kinigadner-Walch</span><a href="https://github.com/annek77" target="_blank" rel="noopener">GitHub</a></footer>
+</body>
+</html>
