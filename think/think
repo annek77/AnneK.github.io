@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Think — Anne Kinigadner-Walch</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--camel-deep:#2A1F14;--camel-dark:#3D2E1E;--camel-mid:#6B5239;--camel-warm:#8B6832;--camel-tan:#C4A265;--camel-light:#D4B87A;--camel-cream:#E8D5B0;--camel-pale:#F2E6D0;--text-body:#E0D0B8;--text-muted:#B09878;--text-dim:#8B7A60;--text-ghost:#6B5A42;--surface:rgba(42,31,20,0.7);--border-warm:rgba(196,162,101,0.2);--border-subtle:rgba(196,162,101,0.12);--border-ghost:rgba(196,162,101,0.08);--font-display:'Newsreader',Georgia,serif;--font-body:'DM Sans',sans-serif;--font-mono:'JetBrains Mono',monospace}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);background:var(--camel-dark);color:var(--text-body);font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.top-leo{background:var(--camel-tan);position:relative;overflow:hidden}.top-leo::before{content:'';position:absolute;inset:0;z-index:0;opacity:0.07;pointer-events:none;mix-blend-mode:multiply;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><defs><pattern id="l" x="0" y="0" width="300" height="300" patternUnits="userSpaceOnUse"><rect width="300" height="300" fill="%23C4A265"/><path d="M32,28C38,18 52,16 58,24C62,29 60,38 54,42C48,36 42,34 36,36C30,38 28,34 32,28Z" fill="%231A1008" opacity="0.88"/><path d="M130,22C140,14 156,18 160,28C164,36 158,46 148,48C142,40 136,36 130,38C124,40 122,32 130,22Z" fill="%231A1008" opacity="0.9"/><path d="M120,100C128,88 148,90 154,102C158,112 150,124 140,128C134,118 126,114 120,116C112,118 110,108 120,100Z" fill="%231A1008" opacity="0.92"/></pattern></defs><rect width="300" height="300" fill="url(%23l)"/></svg>');background-repeat:repeat;background-size:300px 300px}
+.header-inner{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:24px 32px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--camel-deep);text-decoration:none}
+nav{display:flex;gap:32px}nav a{font-family:var(--font-body);font-size:14px;font-weight:600;color:rgba(42,31,20,0.55);text-decoration:none;transition:color 0.3s}nav a:hover,nav a.active{color:var(--camel-deep)}nav a.active{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px;text-decoration-color:rgba(42,31,20,0.3)}
+.ochre-fade{height:100px;background:linear-gradient(to bottom,#C4A265 0%,#B89755 20%,#9A7D44 45%,#6B5A38 70%,#4D3D28 90%,#3D2E1E 100%)}
+.page{max-width:720px;margin:0 auto;padding:48px 32px 60px;animation:fadeUp .6s ease-out}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.section-label{font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:var(--camel-warm);margin-bottom:20px}
+h1{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:500;line-height:1.15;color:var(--camel-cream);margin-bottom:16px}
+.page p{font-size:14px;line-height:1.8;color:var(--text-body);margin-bottom:14px;max-width:600px}
+.tag{display:inline-block;font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--camel-tan);background:rgba(196,162,101,0.06);border:1px solid var(--border-subtle);border-radius:100px;padding:4px 14px;margin-right:6px;margin-top:10px}
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--border-warm),transparent);margin:48px 0}
+.reading{background:var(--surface);border:1px solid var(--border-ghost);border-radius:14px;padding:28px 24px;margin-bottom:14px;transition:border-color .3s}.reading:hover{border-color:var(--border-warm)}
+.apa{font-size:13px;color:var(--text-body);line-height:1.8;padding-left:2em;text-indent:-2em}
+.apa em{font-style:italic}
+.note{font-size:13px;color:var(--text-muted);margin-top:14px;padding-left:2em;line-height:1.7}
+footer{max-width:720px;margin:0 auto;padding:32px 32px 48px;border-top:1px solid var(--border-ghost);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-ghost)}
+footer a{color:var(--text-ghost);text-decoration:none;transition:color 0.3s}footer a:hover{color:var(--camel-tan)}
+@media(max-width:680px){.header-inner{flex-direction:column;align-items:flex-start;gap:16px;padding:20px}nav{gap:20px}.page{padding:32px 20px 48px}.reading{padding:22px 18px}footer{flex-direction:column;gap:16px;align-items:flex-start;padding:24px 20px 40px}}
+</style>
+</head>
+<body>
+<div class="top-leo"><div class="header-inner"><a href="../" class="logo">A.KW</a><nav><a href="../projects/">Projects</a><a href="../about/">About</a><a href="../laugh/">Laugh</a><a href="../move/">Move</a><a href="./" class="active">Think</a><a href="../people/">People</a></nav></div></div>
+<div class="ochre-fade"></div>
+
+<div class="page">
+  <h1>Things That Make Me Think</h1>
+  <p>Papers, books, and arguments that didn't let go after I closed the tab. Some for class, some by choice — the best ones blur the line.</p>
+
+  <div class="divider"></div>
+
+  <div class="section-label">Course Readings — Gaming Seminar SS2026</div>
+
+  <div class="reading">
+    <div class="apa">Bogost, I. (2008). The rhetoric of video games. In K. Salen (Ed.), <em>The ecology of games: Connecting youth, games, and learning</em> (pp. 117–140). MIT Press.</div>
+    <div class="note">A game's rules make arguments the way a speech uses words. He calls this procedural rhetoric. The McDonald's Videogame doesn't tell you fast food is bad — the mechanics force you into the same corners the industry faces. The argument lives in the system, not the script.</div>
+    <div><span class="tag">Procedural Rhetoric</span><span class="tag">Game Studies</span></div>
+  </div>
+
+  <div class="reading">
+    <div class="apa">Galey, A., &amp; Ruecker, S. (2010). How a prototype argues. <em>Literary and Linguistic Computing</em>, <em>25</em>(4), 405–424. https://doi.org/10.1093/llc/fqq021</div>
+    <div class="note">Prototypes aren't demos. They're arguments. A good one is contestable (you can disagree), defensible (it stands on reasoning), and substantive (it says something real). Building things becomes a way of thinking — not just a step after the thinking is done.</div>
+    <div><span class="tag">Prototype Theory</span><span class="tag">Digital Humanities</span></div>
+  </div>
+
+  <div class="reading">
+    <div class="apa">Smith, R. (2013). Serious games 101. In <em>Serious games: Foundations, concepts and practice</em> (STO-EN-MSG-115, pp. 4-1–4-12). NATO Science and Technology Organization.</div>
+    <div class="note">A practical history of serious games, from military sims to health and education. The useful distinction: serious games aren't games with a message bolted on — the learning sits in the mechanics, not the wrapper. The edutainment trap is real and well-documented here.</div>
+    <div><span class="tag">Serious Games</span><span class="tag">History</span></div>
+  </div>
+</div>
+
+<footer><span>&copy; 2026 Anne Kinigadner-Walch</span><a href="https://github.com/annek77" target="_blank" rel="noopener">GitHub</a></footer>
+</body>
+</html>
