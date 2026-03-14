@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Move — Anne Kinigadner-Walch</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--camel-deep:#2A1F14;--camel-dark:#3D2E1E;--camel-mid:#6B5239;--camel-warm:#8B6832;--camel-tan:#C4A265;--camel-light:#D4B87A;--camel-cream:#E8D5B0;--camel-pale:#F2E6D0;--text-body:#E0D0B8;--text-muted:#B09878;--text-dim:#8B7A60;--text-ghost:#6B5A42;--surface:rgba(42,31,20,0.7);--border-warm:rgba(196,162,101,0.2);--border-subtle:rgba(196,162,101,0.12);--border-ghost:rgba(196,162,101,0.08);--font-display:'Newsreader',Georgia,serif;--font-body:'DM Sans',sans-serif;--font-mono:'JetBrains Mono',monospace}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);background:var(--camel-dark);color:var(--text-body);font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.top-leo{background:var(--camel-tan);position:relative;overflow:hidden}.top-leo::before{content:'';position:absolute;inset:0;z-index:0;opacity:0.07;pointer-events:none;mix-blend-mode:multiply;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><defs><pattern id="l" x="0" y="0" width="300" height="300" patternUnits="userSpaceOnUse"><rect width="300" height="300" fill="%23C4A265"/><path d="M32,28C38,18 52,16 58,24C62,29 60,38 54,42C48,36 42,34 36,36C30,38 28,34 32,28Z" fill="%231A1008" opacity="0.88"/><path d="M130,22C140,14 156,18 160,28C164,36 158,46 148,48C142,40 136,36 130,38C124,40 122,32 130,22Z" fill="%231A1008" opacity="0.9"/><path d="M120,100C128,88 148,90 154,102C158,112 150,124 140,128C134,118 126,114 120,116C112,118 110,108 120,100Z" fill="%231A1008" opacity="0.92"/></pattern></defs><rect width="300" height="300" fill="url(%23l)"/></svg>');background-repeat:repeat;background-size:300px 300px}
+.header-inner{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:24px 32px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--camel-deep);text-decoration:none}
+nav{display:flex;gap:32px}nav a{font-family:var(--font-body);font-size:14px;font-weight:600;color:rgba(42,31,20,0.55);text-decoration:none;transition:color 0.3s}nav a:hover,nav a.active{color:var(--camel-deep)}nav a.active{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px;text-decoration-color:rgba(42,31,20,0.3)}
+.ochre-fade{height:100px;background:linear-gradient(to bottom,#C4A265 0%,#B89755 20%,#9A7D44 45%,#6B5A38 70%,#4D3D28 90%,#3D2E1E 100%)}
+.page{max-width:720px;margin:0 auto;padding:48px 32px 60px;animation:fadeUp .6s ease-out}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.section-label{font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:var(--camel-warm);margin-bottom:16px}
+h1{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:500;line-height:1.15;color:var(--camel-cream);margin-bottom:16px}
+h2{font-family:var(--font-display);font-size:22px;font-weight:400;line-height:1.25;color:var(--camel-cream);margin-bottom:12px}
+.page p{font-size:14px;line-height:1.8;color:var(--text-body);margin-bottom:14px;max-width:600px}
+.card{background:var(--surface);border:1px solid var(--border-ghost);border-radius:14px;padding:32px 28px;margin-bottom:20px;transition:border-color .3s}.card:hover{border-color:var(--border-warm)}
+.card-date{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-ghost);margin-bottom:12px}
+.card h3{font-family:var(--font-display);font-size:20px;font-weight:500;color:var(--camel-light);margin-bottom:10px}
+.photos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.photo-placeholder{background:linear-gradient(135deg,rgba(196,162,101,0.06),rgba(139,104,50,0.12));border:1px solid var(--border-subtle);border-radius:10px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center}
+.photo-placeholder span{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-ghost)}
+.stats{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px}
+.stat{text-align:center}
+.stat-num{font-family:var(--font-display);font-size:28px;font-weight:400;color:var(--camel-tan);display:block}
+.stat-label{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-ghost)}
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--border-warm),transparent);margin:48px 0}
+.song-title{font-family:var(--font-display);font-size:20px;font-weight:500;color:var(--camel-light);margin-bottom:4px}
+.song-artist{font-size:14px;color:var(--text-muted);margin-bottom:14px}
+.lyrics{font-family:var(--font-display);font-size:16px;font-style:italic;color:var(--camel-tan);padding:16px 0 16px 20px;border-left:3px solid rgba(196,162,101,0.25);margin:16px 0;line-height:1.6}
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;margin-top:16px}
+.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.spotify{margin-top:14px;border-radius:12px;overflow:hidden}
+.spotify iframe{border:0;width:100%;border-radius:12px}
+footer{max-width:720px;margin:0 auto;padding:32px 32px 48px;border-top:1px solid var(--border-ghost);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-ghost)}
+footer a{color:var(--text-ghost);text-decoration:none;transition:color 0.3s}footer a:hover{color:var(--camel-tan)}
+@media(max-width:680px){.header-inner{flex-direction:column;align-items:flex-start;gap:16px;padding:20px}nav{gap:20px}.page{padding:32px 20px 48px}.card{padding:24px 20px}.photos{grid-template-columns:1fr}footer{flex-direction:column;gap:16px;align-items:flex-start;padding:24px 20px 40px}}
+</style>
+</head>
+<body>
+<div class="top-leo"><div class="header-inner"><a href="../" class="logo">A.KW</a><nav><a href="../projects/">Projects</a><a href="../about/">About</a><a href="../laugh/">Laugh</a><a href="./" class="active">Move</a><a href="../think/">Think</a><a href="../people/">People</a></nav></div></div>
+<div class="ochre-fade"></div>
+
+<div class="page">
+  <h1>Things That Move Me</h1>
+  <p>Running, dancing, and everything that gets the body involved before the brain has time to object.</p>
+
+  <div class="divider"></div>
+
+  <!-- Last Run -->
+  <div class="section-label" id="run-12-03">Last Run</div>
+  <div class="card">
+    <div class="card-date">12 March 2026</div>
+    <h3>Intervals in the Dark Forest</h3>
+    <p>Wednesday evening, just before full dark. The kind of run where the headlamp barely cuts through the fog and the trail exists mostly as a memory. Fast bursts, slow recovery, repeat. No pace display, no other runners — just effort and rest and the sound of branches cracking somewhere off the path.</p>
+    <p>There's something about running intervals with almost no visibility that strips away all the noise. The body figures it out on its own.</p>
+
+    <div class="photos">
+      <div class="photo-placeholder"><span>Photo 1</span></div>
+      <div class="photo-placeholder"><span>Photo 2</span></div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-num">6.2</span><span class="stat-label">km</span></div>
+      <div class="stat"><span class="stat-num">8&times;400</span><span class="stat-label">intervals</span></div>
+      <div class="stat"><span class="stat-num">38:41</span><span class="stat-label">time</span></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Song -->
+  <div class="section-label">Song That Made Me Move Today</div>
+  <div class="card">
+    <div class="card-date">13 March 2026</div>
+    <div class="song-title">Starboy</div>
+    <div class="song-artist">The Weeknd ft. Daft Punk</div>
+    <p>Some songs don't ask permission. This one just starts and suddenly you're moving. Kitchen, hallway, desk chair — doesn't matter where. The beat handles the thinking.</p>
+
+    <div class="lyrics">Look what you've done<br>I'm a motherfuckin' starboy</div>
+
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/34Na4j8AVgA" title="The Weeknd - Starboy ft. Daft Punk" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    </div>
+
+    <div class="spotify">
+      <iframe src="https://open.spotify.com/embed/track/7MXVkk9YMctZqd1Srtv4MB?utm_source=generator&theme=0" height="152" allowfullscreen allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy"></iframe>
+    </div>
+  </div>
+</div>
+
+<footer><span>&copy; 2026 Anne Kinigadner-Walch</span><a href="https://github.com/annek77" target="_blank" rel="noopener">GitHub</a></footer>
+</body>
+</html>
